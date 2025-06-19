@@ -558,12 +558,6 @@
     </div>
 </form>
 
-@foreach ($eventos as $evento)
-    <div>
-        <h2>{{ $evento->nombre_evento }}</h2>
-        <a href="{{ route('eventos.edit', $evento->id_evento) }}">Editar</a>
-    </div>
-@endforeach
 
   <script>
     function goBack() {

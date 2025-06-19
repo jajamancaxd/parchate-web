@@ -19,7 +19,7 @@ class EventoController extends Controller
     public function create()
     {
         // Mostrar el formulario de creación
-        return view('eventos.form');
+        return view('eventos.create');
     }
 
     public function store(Request $request)
@@ -58,8 +58,8 @@ class EventoController extends Controller
             }
         }
 
-        // Redirigir al detalle del evento recién creado
-        return redirect()->route('eventos.show', $evento->id_evento)->with('success', 'Evento creado correctamente.');
+        // Redirigir a la vista de eventos guardados
+        return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente.');
     }
 
     public function show(Evento $evento)
@@ -72,12 +72,15 @@ class EventoController extends Controller
     }
 
     public function edit(Evento $evento)
-{
-    $eventos = Evento::all(); // Esto carga todos los eventos
-    return view('eventos.edit', compact('evento', 'eventos'));
-}
+    {
+        // Cargar todas las imágenes del evento
+        $evento->load('imagenes');
 
+        // Cargar todos los eventos (por si los quieres mostrar, opcional)
+        $eventos = Evento::with('imagenes')->get();
 
+        return view('eventos.edit', compact('evento', 'eventos'));
+    }
 
     public function update(Request $request, Evento $evento)
     {
@@ -115,7 +118,7 @@ class EventoController extends Controller
             }
         }
 
-        // Redirigir al índice de eventos o puedes cambiar por el detalle
+        // Redirigir a la vista de eventos guardados
         return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente.');
     }
 }
