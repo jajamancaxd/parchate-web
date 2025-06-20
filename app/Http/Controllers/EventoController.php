@@ -23,8 +23,7 @@ class EventoController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validar los datos del formulario
+{
         $request->validate([
             'nombre_evento' => 'required|string|max:255',
             'descripcion_evento' => 'required|string',
@@ -32,7 +31,7 @@ class EventoController extends Controller
             'fecha_fin_evento' => 'nullable|date|after_or_equal:fecha_inicio_evento',
             'hora_inicio_evento' => 'required',
             'ubicacion_dada_evento' => 'required|string|max:255',
-            'imagenes.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagenes.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         // Crear el evento
@@ -45,7 +44,7 @@ class EventoController extends Controller
             'ubicacion_dada_evento' => $request->ubicacion_dada_evento,
         ]);
 
-        // Guardar las imágenes si existen
+        // Guardar imágenes si hay
         if ($request->hasFile('imagenes')) {
             foreach ($request->file('imagenes') as $index => $imagen) {
                 $path = $imagen->store('imagenes_evento', 'public');
@@ -58,9 +57,9 @@ class EventoController extends Controller
             }
         }
 
-        // Redirigir a la vista de eventos guardados
-        return redirect()->route('eventos.index')->with('success', 'Evento creado correctamente.');
+        return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente.');
     }
+
 
     public function show(Evento $evento)
     {
@@ -83,8 +82,7 @@ class EventoController extends Controller
     }
 
     public function update(Request $request, Evento $evento)
-    {
-        // Validar los datos del formulario
+{
         $request->validate([
             'nombre_evento' => 'required|string|max:255',
             'descripcion_evento' => 'required|string',
@@ -92,10 +90,10 @@ class EventoController extends Controller
             'fecha_fin_evento' => 'nullable|date|after_or_equal:fecha_inicio_evento',
             'hora_inicio_evento' => 'required',
             'ubicacion_dada_evento' => 'required|string|max:255',
-            'imagenes.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagenes.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',  // <-- aquí agregamos webp
         ]);
 
-        // Actualizar el evento
+        // Actualizar evento
         $evento->update([
             'nombre_evento' => $request->nombre_evento,
             'descripcion_evento' => $request->descripcion_evento,
@@ -105,7 +103,6 @@ class EventoController extends Controller
             'ubicacion_dada_evento' => $request->ubicacion_dada_evento,
         ]);
 
-        // Guardar nuevas imágenes si se subieron
         if ($request->hasFile('imagenes')) {
             foreach ($request->file('imagenes') as $index => $imagen) {
                 $path = $imagen->store('imagenes_evento', 'public');
@@ -118,7 +115,6 @@ class EventoController extends Controller
             }
         }
 
-        // Redirigir a la vista de eventos guardados
         return redirect()->route('eventos.index')->with('success', 'Evento actualizado correctamente.');
     }
 }

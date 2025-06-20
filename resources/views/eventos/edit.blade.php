@@ -566,7 +566,7 @@
         <input type="hidden" name="hora_inicio_evento" id="inputHorario" value="{{ $evento->hora_inicio_evento }}" />
 
         <div class="section submit-buttons">
-            <button type="button" class="publish" onclick="submitForm()">Actualizar</button>
+            <button type="submit" class="publish">Actualizar</button>
             <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
         </div>
     </div>
@@ -739,7 +739,8 @@
 
     function handleImageUpload(event) {
         const files = Array.from(event.target.files);
-        event.target.value = '';
+        // Eliminamos esta línea para que el input mantenga las imágenes seleccionadas:
+        // event.target.value = '';
 
         let filesToProcess = files.slice(0, MAX_IMAGES);
 
@@ -763,6 +764,7 @@
             }
         }
     }
+
 
     function renderImageSlot(slotElement, file, index) {
         slotElement.innerHTML = '';

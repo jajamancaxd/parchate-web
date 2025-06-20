@@ -13,6 +13,7 @@ class Evento extends Model
     protected $primaryKey = 'id_evento';
 
     public $timestamps = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
         'nombre_evento',
@@ -25,8 +26,6 @@ class Evento extends Model
 
     public function imagenes()
     {
-        return $this->hasMany(ImagenEvento::class, 'id_evento');
+        return $this->hasMany(ImagenEvento::class, 'id_evento', 'id_evento');
     }
 }
-
-

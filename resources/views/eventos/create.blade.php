@@ -726,7 +726,8 @@
 
     function handleImageUpload(event) {
         const files = Array.from(event.target.files);
-        event.target.value = '';
+        // Eliminamos esta línea para que el input mantenga las imágenes seleccionadas:
+        // event.target.value = '';
 
         let filesToProcess = files.slice(0, MAX_IMAGES);
 
@@ -796,18 +797,19 @@
     }
 
     function submitForm() {
-    const selectedEventTypes = Array.from(document.querySelectorAll("#eventTypeSelect .multi-select-option.selected"))
-        .map(item => item.textContent.trim());
+        console.log("Enviando formulario..."); // <-- agrega esto
 
-    const selectedEventTime = document.querySelector("#eventTimeSelect .single-select-option.selected")?.textContent.trim() || null;
+        const selectedEventTypes = Array.from(document.querySelectorAll("#eventTypeSelect .multi-select-option.selected"))
+            .map(item => item.textContent.trim());
 
-    // Pasar los valores a los inputs ocultos
-    document.getElementById('inputEtiquetas').value = JSON.stringify(selectedEventTypes);
-    document.getElementById('inputHorario').value = selectedEventTime;
+        const selectedEventTime = document.querySelector("#eventTimeSelect .single-select-option.selected")?.textContent.trim() || null;
 
-    // Enviar el formulario después de llenar los campos ocultos
-    document.getElementById('eventoForm').submit();
+        document.getElementById('inputEtiquetas').value = JSON.stringify(selectedEventTypes);
+        document.getElementById('inputHorario').value = selectedEventTime;
+
+        document.getElementById('eventoForm').submit();
 }
+
 
     document.addEventListener('DOMContentLoaded', function() {
       updateSingleSelectedTag('eventTimeSelect', null);
@@ -818,5 +820,8 @@
       updateRemoveButtonsVisibility(); // Initial check for remove buttons
     });
   </script>
+
+
+
 </body>
 </html>
