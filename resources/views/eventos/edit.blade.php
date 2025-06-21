@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Registro Evento</title>
+  <title>Modificar Evento</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -32,7 +32,7 @@
     }
 
     header {
-      max-width: 700px;
+      max-width: 728px;
       margin: 20px auto 0 auto;
       background-color: #ff6600;
       color: white;
@@ -566,7 +566,7 @@
         <input type="hidden" name="hora_inicio_evento" id="inputHorario" value="{{ $evento->hora_inicio_evento }}" />
 
         <div class="section submit-buttons">
-            <button type="submit" class="publish">Actualizar</button>
+            <button type="submit" class="publish">Publicar</button>
             <button type="button" class="cancel" onclick="goBack()">Cancelar</button>
         </div>
     </div>

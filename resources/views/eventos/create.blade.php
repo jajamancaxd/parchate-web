@@ -32,7 +32,7 @@
     }
 
     header {
-      max-width: 700px;
+      max-width: 728px;
       margin: 20px auto 0 auto;
       background-color: #ff6600;
       color: white;
